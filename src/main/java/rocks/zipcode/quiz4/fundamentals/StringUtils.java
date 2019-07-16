@@ -1,6 +1,9 @@
 package rocks.zipcode.quiz4.fundamentals;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.TreeSet;
 
 /**
  * @author leon on 21/12/2018.
@@ -9,41 +12,87 @@ public class StringUtils {
     public static Character getMiddleCharacter(String string) {
        char c = string.charAt(string.length()/2);
 
-      //  return string.charAt(string.substring(position, position+length));
         return c;
     }
 
     public static String capitalizeMiddleCharacter(String str) {
-        StringBuffer strBf = new StringBuffer();
-        getMiddleCharacter(str);
-        char ch = Character.toUpperCase(strBf.charAt(getMiddleCharacter(str)));
-        str.replace(getMiddleCharacter(str), ch);
+      String result =  str.substring(0, str.length()/2);
+      Character mid = Character.toUpperCase(getMiddleCharacter(str));
+      String third = str.substring((str.length()/2)+1, str.length());
+      String finalResult = result+mid+third;
 
 
-        return strBf.toString();
+        return finalResult;
     }
 
     public static String lowerCaseMiddleCharacter(String str) {
-        return null;
+        String result =  str.substring(0, str.length()/2);
+        Character mid = Character.toLowerCase(getMiddleCharacter(str));
+        String third = str.substring((str.length()/2)+1, str.length());
+        String finalResult = result+mid+third;
+
+
+        return finalResult;
     }
 
     public static Boolean isIsogram(String str) {
-        return null;
+        String[] ch = str.split( "");
+        LinkedHashSet<String> tr = new LinkedHashSet<String>(Arrays.asList(ch));
+        if(ch.length==tr.size()){
+            return true;
+        }
+        return false;
     }
 
     public static Boolean hasDuplicateConsecutiveCharacters(String str) {
-        return null;
+        for (int i = 0; i < str.length()-1; i++) {
+
+                if(str.charAt(i)==str.charAt(i+1)){
+                    return true;
+                }
+
+            }
+
+
+
+
+        return false;
     }
 
     public static String removeConsecutiveDuplicateCharacters(String str) {
-        HashSet<String> s = new HashSet<>();
-        for (int i = 0; i <str.length() ; i++) {
+//      String result = "";
+        for (int i = 0; i < str.length()-1; i++) {
+            if (str.charAt(i) == str.charAt(i + 1)) {
 
+                str = str.substring(0, i) + str.substring(i+2);
+            }
+//                i++;
+//
+//            }
+//            else{
+//                result +=str.charAt(i);
+//
+//            }
+//
+//        }
+//        result +=str.charAt(str.length()-1);
         }
-        return null;
+        return str;
     }
 
     public static String invertCasing(String str) {
-        return null;
+
+        String willBeReturn = "";
+        for (int i = 0; i <str.length(); i++) {
+            if(Character.isUpperCase(str.charAt(i))){
+               willBeReturn+= Character.toLowerCase(str.charAt(i));
+
+            }
+          else{
+             willBeReturn += Character.toUpperCase(str.charAt(i));
+            }
+        }
+
+        return willBeReturn ;
     }
 }
